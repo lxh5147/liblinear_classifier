@@ -11,7 +11,7 @@ import os
 from feature_extractor import feature_extractors
 
 # update it to your local install
-TRAIN_CMD = "/home/lxh5147/liblinear-2.1/train"
+TRAIN_CMD = "liblinear-2.1/train"
 
 def train(model_file_path, lable_feature_map_file_path, feature_extractors, input_file_path):
     # build corpus for evaluation

@@ -11,7 +11,7 @@ import argparse
 from feature_extractor import feature_extractors
 
 # update it to your local install
-PREDICT_CMD = "/home/lxh5147/liblinear-2.1/predict"
+PREDICT_CMD = "liblinear-2.1/predict"
 
 class Prediction(object):
     '''
