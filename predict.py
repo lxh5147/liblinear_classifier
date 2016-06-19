@@ -9,6 +9,7 @@ from utilities import run
 from convert_to_liblinear import Corpus
 import argparse
 from feature_extractor import feature_extractors
+import os
 
 # update it to your local install
 PREDICT_CMD = "liblinear-2.1/predict"
@@ -85,4 +86,10 @@ if __name__ == '__main__':
     if predict_input_file is None:
         predict_input_file = "predict.input"
     Corpus.build_corpus_input_file(args.predict_file_root, predict_input_file)
-    predict(args.model, args.map, feature_extractors, predict_input_file, args.prediction_file_path, args.output_file_path)
+    temp_prediction_output_file = args.output_file_path + ".tmp"
+    predict(args.model, args.map, feature_extractors, predict_input_file, args.prediction_file_path, temp_prediction_output_file)
+    #to build the final prediction output file by using: paste predict.input lib.predicts | cut --complement -f1
+    run ("paste %s %s | cut --complement -f1 > %s" % (predict_input_file,temp_prediction_output_file,args.output_file_path))
+    os.remove(temp_prediction_output_file)
+    if args.predict_input_file is None:
+        os.remove(predict_input_file)
